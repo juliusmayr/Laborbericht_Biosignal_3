@@ -1,15 +1,61 @@
-% sections/einleitung.tex
+Ziel dieser Laboreinheit war der Aufbau, die Inbetriebnahme und die Anwendung 
+eines Elektromyografie-(EMG-)Messsystems zur Erfassung und Analyse muskulärer Aktivität. 
+Die Studierenden sollten ein grundlegendes Verständnis dafür entwickeln, wie elektrische Signale der Skelettmuskulatur mit Hilfe 
+von Oberflächenelektroden erfasst, verstärkt, digitalisiert und rechnergestützt ausgewertet werden können. 
+Ein besonderer Fokus lag auf der Untersuchung des Zusammenhangs zwischen Muskelaktivierung, äußerer Belastung und Ermüdung.
+Neben der praktischen Durchführung der Messungen wurde die Qualität der EMG-Signale analysiert und der Einfluss typischer Störquellen 
+wie Bewegungsartefakte und Kabelbewegungen. Durch geeignete Vorverarbeitungsschritte wie Offsetkorrektur, Bandpassfilterung, 
+Gleichrichtung und Hüllkurvenbildung sollten aussagekräftige Kenngrößen der Muskelaktivität gewonnen werden. 
+Darüber hinaus wurde eine Frequenzanalyse durchgeführt, um Veränderungen der spektralen Eigenschaften des EMG-Signals im Verlauf einer 
+Muskelermüdung zu untersuchen und diese mit der Rekrutierung unterschiedlicher Muskelfasertypen in Beziehung zu setzen.
 
-In diesem Laborversuch werden biosignalbasierte Messdaten aufgenommen, vorverarbeitet und analysiert.
-Ziel ist es, den vollständigen Workflow von der Datenerfassung über die Signalaufbereitung bis zur
-quantitativen Auswertung nachvollziehbar zu dokumentieren.
 
-Im Fokus stehen dabei (i) die Auswahl geeigneter Messparameter und Versuchsbedingungen, (ii) die
-Qualitätssicherung der Rohdaten (z.\,B. Erkennen von Artefakten und Störungen) sowie (iii) die
-Ableitung relevanter Kennwerte aus dem Signal. Die Auswertung erfolgt anhand klar definierter
-Kriterien, sodass die Ergebnisse reproduzierbar sind.
+\section{Aufgaben}
 
-Der Bericht ist wie folgt aufgebaut: Zunächst werden die theoretischen Grundlagen und die für die
-Interpretation relevanten Signalcharakteristika beschrieben. Anschließend werden Versuchsaufbau und
-Messdurchführung dargestellt. Darauf aufbauend folgen die Auswertemethodik und die Ergebnisse.
-Abschließend werden die Resultate diskutiert und in einem Fazit zusammengefasst.
+Die Hauptaufgaben der Übung umfassten:
+\begin{itemize}[leftmargin=*] % * entfernt Einrückung
+    \item Aufbau und Inbetriebnahme des EMG-Messsystems
+    \item Platzierung von Oberflächenelektroden am \textit{Musculus biceps brachii}
+    \item Aufnahme von EMG-Rohdaten bei maximaler willkürlicher Kontraktion (MVC), relativer Belastung und Ermüdung
+    \item Anwendung von Vorverarbeitungsschritten auf die EMG-Rohdaten (Offsetkorrektur, Filterung, Gleichrichtung, Hüllkurvenbildung)
+    \item Berechnung der MVC sowie der relativen Muskelaktivität in Prozent der MVC
+    \item Durchführung einer Frequenzanalyse und Berechnung der Medianfrequenz zur Bewertung der Muskelermüdung
+\end{itemize}
+
+\section{Verwendete Hardware}
+
+Das EMG-Messsystem besteht aus mehreren Hardware- und Softwarekomponenten, die über definierte Signalpfade miteinander verbunden sind (siehe Abbildung~\ref{fig:setup}). Jede Komponente erfüllt eine spezifische Funktion in der Erfassung, Digitalisierung und Übertragung der EMG-Signale.  
+Beschreibung der Komponenten und Signalpfade:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Mikrocontroller:} \\
+    Der Mikrocontroller dient als zentrale Verarbeitungseinheit des Systems. Er steuert die Kommunikation mit dem externen Analog-Digital-Konverter und überträgt die digitalisierten Messdaten über die serielle USB-Schnittstelle an den Computer.
+
+    \item \textbf{EMG/EKG-Sensor:} \\
+    Der EMG-Sensor erfasst die elektrischen Potentiale der Muskulatur über Oberflächenelektroden, verstärkt das Signal und stellt es als analoges Ausgangssignal zur weiteren Digitalisierung bereit.
+
+    \item \textbf{Oberflächenelektroden:} \\
+    Zwei Messelektroden werden entlang des Muskelbauchs des \textit{Musculus biceps brachii} platziert, während eine Referenzelektrode an einem knöchernen, bewegungsarmen Bereich angebracht wird. Sie bilden die Schnittstelle zwischen physiologischem Signal und Messsystem.
+
+    \item \textbf{12-Bit Analog-Digital-Konverter (ADC):} \\
+    Der externe ADC digitalisiert das analoge EMG-Signal mit höherer Auflösung als der interne ADC des Mikrocontrollers. Die Kommunikation erfolgt über den I\textsuperscript{2}C-Bus mittels Qwiic-Kabel.
+
+    \item \textbf{Jumper- und Qwiic-Kabel:} \\
+    Jumper-Kabel dienen der Übertragung von Versorgungsspannung und analogem Signal zwischen Sensor und ADC. Das Qwiic-Kabel stellt die digitale I\textsuperscript{2}C-Verbindung zwischen ADC und Mikrocontroller her.
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bild.png} % Hier Bilddatei einsetzen
+    \caption{Setup des EMG-Messsystems}
+    \label{fig:setup}
+\end{figure}
+
+Dieses Setup ermöglicht eine hochauflösende Erfassung von EMG-Signalen und stellt sicher, dass die Messdaten für die zeit- und frequenzbasierte Analyse der Muskelaktivität und Ermüdung geeignet sind. Durch die klare Zuordnung der Signalpfade und Kommunikationsschnittstellen wird die Funktionsweise des Systems transparent und nachvollziehbar dargestellt.
+
+\section{Rahmenbedingungen}
+
+Die Laborsitzung fand am 15.12.2025 im Medizintechniklabor des Management Center
+Innsbruck (MCI) statt. Die Durchführung erfolgte von Jakob Haas, Julius Mayr und Sophia
+Nowotny unter der Anleitung von Aitor Morillo und Gerda Strutzenberger.
+

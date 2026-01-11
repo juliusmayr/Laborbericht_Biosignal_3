@@ -1,0 +1,68 @@
+Die Durchführung des Labors gliederte sich in drei Hauptteile:
+\begin{enumerate}
+    \item Aufnahme der maximalen freiwilligen Kontraktion (MVC)
+    \item Messung der relativen Muskelaktivität bei unterschiedlichen Belastungen
+    \item Messung der Muskelerholung und Ermüdung
+\end{enumerate}
+
+Alle Messungen wurden unter identischen Systemeinstellungen und Elektrodenpositionen durchgeführt,
+um die Vergleichbarkeit der Ergebnisse sicherzustellen. 
+Die Elektroden und das Messsystem wurden entsprechend den vorbereitenden Arbeiten (Abschnitte~2.2 und~2.5) aufgebaut.
+
+\subsection{Maximale freiwillige Kontraktion (MVC)}
+
+Alle drei Gruppenmitglieder führten dieses Experiment durch, um ihre persönliche maximale Muskelaktivität zu bestimmen. 
+Die Teilnehmer nahmen jeweils eine Sitzposition ein, bei der der Oberarm vertikal gehalten und der Unterarm um 90° gebeugt war, 
+während die Hand die untere Tischkante umgriff. Die anderen Gruppenmitglieder stabilisierten den Tisch, 
+sodass dieser während der isometrischen Kontraktion nicht bewegt wurde und der aktive Teilnehmer seine maximale Kraft aufbringen konnte.
+
+Jeder Teilnehmer führte drei Durchläufe mit jeweils fünf Sekunden maximaler Anspannung durch, zwischen denen mindestens 60 Sekunden Pause lagen.
+Die Rohdaten wurden in separaten CSV-Dateien gespeichert und dienten als Basis für die Berechnung der MVC, die als Referenz für die 
+relative Muskelaktivität sowie für die Analyse der Muskelermüdung verwendet wurde.
+
+Dieser Aufbau erlaubt dem Muskel, sich maximal zu kontrahieren, da der Unterarm fixiert ist und der Tisch als stabiler Widerstand dient.
+Die isometrische Kontraktion stellt sicher, dass sich die Muskellänge nicht verändert, wodurch die maximale Muskelspannung erfasst wird.
+
+\subsection{Relative Muskelaktivität}
+
+Dieses Experiment wurde von einem Gruppenmitglied durchgeführt, um die Muskelaktivität bei unterschiedlichen Belastungen zu messen.
+Die Sitzposition und Armhaltung entsprachen der MVC-Messung. Der Teilnehmer hielt nacheinander drei verschiedene Gewichte für jeweils 
+zehn Sekunden, wobei zwischen den Durchgängen mindestens 40 Sekunden Pause eingelegt wurden.
+
+Die EMG-Daten wurden für jeden Durchgang separat aufgezeichnet, um die relative Muskelaktivität als Prozentsatz der zuvor bestimmten MVC 
+berechnen zu können. Die verwendeten Gewichte betrugen:
+\begin{itemize}
+    \item \textbf{Gewicht 1 (ca.\ 25\,\% MVC):} 5{,}75\,kg
+    \item \textbf{Gewicht 2 (ca.\ 50\,\% MVC):} 10{,}00\,kg
+    \item \textbf{Gewicht 3 (ca.\ 75\,\% MVC):} 15{,}75\,kg
+\end{itemize}
+
+\subsection{Muskelermüdung}
+
+Die Untersuchung der Muskelermüdung wurde ebenfalls von einem Gruppenmitglied durchgeführt. 
+Der Teilnehmer nahm dieselbe Sitzposition wie bei der MVC-Messung ein. 
+Es wurden isometrische Kontraktionen von jeweils 15 Sekunden durchgeführt, gefolgt von Pausen von 60 Sekunden. 
+Dieser Ablauf wurde dreimal wiederholt.
+
+Innerhalb jedes Durchlaufs wurden drei Zeitpunkte ausgewählt – zu Beginn, in der Mitte und am Ende der Kontraktion – um Veränderungen 
+im Frequenzspektrum und Verschiebungen der Medianfrequenz zu analysieren. 
+Die Rohdaten wurden in CSV-Dateien gespeichert und anschließend in Python gefiltert, gleichgerichtet und in Einhüllenden umgerechnet. 
+Auf Grundlage dieser Daten konnten die Muskelaktivität, die spektrale Leistungsdichte sowie die Medianfrequenz über die Dauer der Ermüdung 
+berechnet werden.
+
+\subsection{Zusammenfassung der Durchführung}
+
+Die Durchführung umfasste:
+\begin{itemize}
+    \item Aufbau und Dokumentation des Messsystems (Arduino, ADC, EMG-Sensor, Elektroden)
+    \item Vorbereitung der Elektroden und Sicherstellung einer hohen Signalqualität
+    \item Aufnahme der Rohdaten über Python und Speicherung in CSV-Dateien
+    \item Durchführung der drei Experimente:
+    \begin{itemize}
+        \item MVC-Messung für alle Gruppenmitglieder
+        \item Messung der relativen Muskelaktivität für ein Gruppenmitglied
+        \item Untersuchung der Muskelermüdung für ein Gruppenmitglied
+    \end{itemize}
+    \item Gewährleistung ausreichender Pausen vor und nach den Kontraktionen zur Minimierung von Artefakten
+    \item Bereitstellung der Rohdaten für die spätere Signalverarbeitung (Filterung, Gleichrichtung, Einhüllende, Frequenzanalyse, Berechnung der MVC und relativen Muskelaktivität)
+\end{itemize}

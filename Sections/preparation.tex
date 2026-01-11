@@ -1,0 +1,88 @@
+Bevor die Messungen durchgeführt wurden, war es notwendig, die grundlegenden physiologischen und technischen Prinzipien der EMG-Erfassung
+zu verstehen. Das Elektromyogramm (EMG) misst die elektrische Aktivität von Muskeln über Hautelektroden.
+Diese Signale werden vom EMG/EKG-Sensor verstärkt, gefiltert und als analoges Spannungssignal an den Mikrocontroller weitergegeben.
+Für eine zuverlässige Messung mussten sowohl die Elektroden korrekt positioniert als auch die relevanten Parameter der Datenaufnahme,
+insbesondere Abtastrate und Übertragungsgeschwindigkeit, verstanden werden.
+
+\subsection{Messverfahren}
+
+Das EMG erfasst die zeitliche Änderung des elektrischen Potentials, das durch die Depolarisation und Repolarisation der Muskelfasern entsteht.
+Zwischen zwei Punkten auf der Hautoberfläche entsteht dabei ein messbares Spannungsgefälle, das typischerweise im Mikrovoltbereich liegt.
+
+Der verwendete EMG/EKG-Sensor führt folgende Schritte aus:
+\begin{itemize}
+    \item \textbf{Differenzielle Ableitung:} Die Spannungsdifferenz zwischen den Messelektroden (weiß und rot) wird gemessen, während die schwarze Elektrode als Referenz dient.
+    \item \textbf{Vorverstärkung:} Da EMG-Signale sehr klein sind, wird das Rohsignal im Sensor verstärkt.
+    \item \textbf{Ausgabe des analogen Signals:} Das verstärkte EMG wird als analoger Spannungswert (VOUT) an den Mikrocontroller übergeben, welcher das Signal digitalisiert.
+\end{itemize}
+
+\subsection{Vorbereitung der Elektroden}
+
+Für eine saubere EMG-Messung müssen die Elektroden auf gereinigten, trockenen und möglichst haarfreien Hautstellen angebracht werden.
+Elektroden messen das elektrische Potential der darunterliegenden Muskelfasern.
+Um Bewegungsartefakte zu minimieren, sollten die Kabel flexibel fixiert werden, sodass sie die Muskelbewegung nicht stark einschränken 
+oder ziehen.
+
+Für die Messung des \textit{Musculus biceps brachii} gelten folgende Positionierungen:
+\begin{itemize}
+    \item \textbf{Weiße Elektrode:} Auf dem Muskelbauch des Bizeps, mittig entlang der Muskelfaserrichtung.
+    \item \textbf{Rote Elektrode:} In Richtung der Sehne, etwa 2\,cm vom Muskelbauch entfernt.
+    \item \textbf{Schwarze Elektrode (Referenz):} Auf einem knöchernen Körperteil mit minimaler Muskelaktivität. Für die in diesem Laborbericht beschriebenen Messungen wurde der Halswirbel C7 gewählt.
+\end{itemize}
+
+Diese Platzierungen basieren auf den Empfehlungen der SENIAM-Richtlinien sowie der EMG-Fibel von Peter Konrad, die für die Oberflächenmessung des Bizeps eine hohe Signalqualität und minimale Störartefakte gewährleisten. Eine falsche Platzierung oder unzureichende Hautvorbereitung kann zu stark verrauschten Signalen und unklar erkennbaren Muskelaktivitäten führen.
+
+\subsection{Störquellen und Einflussfaktoren}
+
+Da EMG-Signale sehr klein sind, sind sie anfällig für externe Störungen. 
+Wichtige Einflussgrößen, die im Praktikum berücksichtigt wurden, sind:
+\begin{itemize}
+    \item \textbf{Bewegungsartefakte:} Entstehen durch Zug oder Schwingungen der Kabel sowie durch unkontrollierte Muskelbewegungen.
+    \item \textbf{Kontaktartefakte:} Schlechter Hautkontakt kann Baseline-Wanderungen oder Signalabbrüche verursachen.
+    \item \textbf{Sensorseitige Verstärkung:} Verstärkt nicht nur das EMG-Signal, sondern auch Störanteile, wenn die Elektroden nicht optimal positioniert sind.
+\end{itemize}
+
+\subsection{Einstellungen des Messsystems}
+
+Für die Aufnahme der Rohdaten mussten folgende Systemeinstellungen vorgenommen werden:
+\begin{itemize}
+    \item \textbf{Baudrate erhöhen:} \texttt{Serial.begin(500000)} zur Vermeidung von Datenverlust bei hoher Abtastrate.
+    \item \textbf{Analoges Signal einlesen:} Der 12-Bit-ADC am Mikrocontroller digitalisiert die analogen EMG-Signale.
+    \item \textbf{Datenaufnahme mit Python:} Direkte Kommunikation zwischen Mikrocontroller und Computer ermöglicht eine kontinuierliche Rohdatenspeicherung in CSV-Dateien.
+\end{itemize}
+
+Diese Einstellungen gewährleisten eine verlustfreie Aufnahme der Rohdaten bei schneller Abtastrate.
+
+\subsection{Aufzeichnung der Rohdaten}
+
+Die Rohdaten der EMG-Messungen wurden direkt vom Mikrocontroller über die serielle Schnittstelle an einen Computer übertragen.
+Dabei wurde Python anstelle des Arduino Serial Monitors verwendet, da der Serial Monitor bei hoher Abtastrate (1000\,Hz) nicht zuverlässig 
+alle Daten erfassen kann.
+
+Ein Python-Skript las die seriellen Werte ein, konvertierte sie in digitale Werte und speicherte sie fortlaufend in einer CSV-Datei.
+So konnten die Messdaten verlustfrei aufgezeichnet und für spätere Analysen (Filtern, Gleichrichten, Berechnung der Einhüllenden
+und Frequenzanalyse) zur Verfügung gestellt werden.
+
+Die wichtigsten Parameter der Datenerfassung waren:
+\begin{itemize}
+    \item \textbf{Port:} Verbindung zum Mikrocontroller über USB
+    \item \textbf{Baudrate:} 1\,000\,000\,Baud zur Gewährleistung einer schnellen Übertragung
+    \item \textbf{Samplingdauer:} Je nach Experiment angepasst
+    \item \textbf{Dateiformat:} CSV zur einfachen Weiterverarbeitung in Python
+\end{itemize}
+
+Diese Vorgehensweise stellt sicher, dass die gemessenen EMG-Signale vollständig und in hoher zeitlicher Auflösung vorliegen,
+wodurch eine genaue Analyse der Muskelaktivität möglich ist.
+
+\subsection{Zusammenfassung}
+
+Die vorbereitenden Arbeiten umfassten:
+\begin{itemize}
+    \item das Verständnis der physiologischen Grundlagen des EMG-Signals
+    \item die Grundprinzipien der differenziellen Messung und Signalverstärkung
+    \item die Identifikation typischer Störquellen und deren Auswirkungen auf das Signal
+    \item sowie die Konfiguration des Messsystems (Baudrate, Samplingrate, Rohdatenspeicherung)
+\end{itemize}
+
+Mit diesem theoretischen Hintergrund konnten die Messungen geplant, sorgfältig durchgeführt und anschließend mithilfe digitaler
+Signalverarbeitung analysiert werden.

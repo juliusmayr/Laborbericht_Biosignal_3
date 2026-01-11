@@ -1,0 +1,28 @@
+\subsection{Vorverarbeitung der EMG-Daten}
+
+Die aufgezeichneten EMG-Rohdaten wurden vor der eigentlichen Analyse vorverarbeitet, um das physiologisch relevante Muskelaktivitätssignal
+von Störanteilen zu trennen und eine robuste Bestimmung der maximalen Muskelaktivität zu ermöglichen.
+Zunächst wurde der Mittelwert des EMG-Signals entfernt, um einen Offset der Nulllinie zu korrigieren, der durch das Messsystem 
+oder die Elektroden entstehen kann. Anschließend erfolgte eine Bandpassfilterung mit einem Butterworth-Filter im Frequenzbereich von 
+20 bis 450\,Hz. Dieser Frequenzbereich entspricht dem typischen Spektrum von Oberflächen-EMG-Signalen und reduziert sowohl 
+niederfrequente Bewegungsartefakte als auch hochfrequentes elektrisches Rauschen. 
+
+Im nächsten Schritt wurde das gefilterte Signal gleichgerichtet, indem der Absolutwert gebildet wurde. 
+Dadurch wird die wechselnde Polarität des EMG-Signals eliminiert und die Muskelaktivität unabhängig vom Vorzeichen des Signals dargestellt. 
+Abschließend wurde aus dem gleichgerichteten Signal eine Einhüllende berechnet, indem ein Tiefpassfilter mit einer Grenzfrequenz 
+von 3\,Hz angewendet wurde. Diese Einhüllende beschreibt den zeitlichen Verlauf der Muskelaktivität und dient zur Bestimmung der maximalen
+Kontraktionsstärke (vgl. Abbildung~\ref{fig:Vorverarbeitung}).
+
+Die einzelnen Schritte der Vorverarbeitung sind notwendig, da:
+\begin{itemize}
+    \item die Offsetkorrektur eine Verfälschung der Signalamplitude durch eine verschobene Nulllinie verhindert,
+    \item die Bandpassfilterung das relevante EMG-Frequenzband isoliert und Störsignale reduziert,
+    \item Gleichrichtung und Einhüllendenbildung eine quantitative Beschreibung der Muskelaktivität ermöglichen.
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Laborbericht_Biosignal_3/Graphen/Vorverarbeitung.png}
+    \caption{Vorverarbeitung der EMG-Daten während der MVC-Messung. (a) Bandpassgefiltertes EMG-Signal nach Offset-Korrektur, (b) gleichgerichtetes EMG-Signal, (c) Einhüllende des EMG-Signals nach Tiefpassfilterung (3 Hz).}
+    \label{fig:Vorverarbeitung}
+\end{figure}
